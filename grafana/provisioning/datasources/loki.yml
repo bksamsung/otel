@@ -1,0 +1,17 @@
+apiVersion: 1
+
+datasources:
+  - name: Loki
+    uid: loki
+    type: loki
+    url: http://localhost:3100
+    editable: true
+    isDefault: false
+    jsonData:
+      derivedFields:
+      - name: Trace Link
+        type: jaeger
+        matcherType: label
+        matcherRegex: trace_id
+        urlDisplayLabel: Trace link
+        url: "http://localhost:16686/trace/$${__value.raw}"
